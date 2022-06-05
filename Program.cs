@@ -70,7 +70,7 @@ namespace HomeWorkAkwarium
 
                 for (int i = 0; i < _fishs.Count; i++)
                 {
-                    Console.Write($"\n{i+1} Рыба {_fishs[i].Name} ");
+                    Console.Write($"\n{i + 1} Рыба {_fishs[i].Name} ");
 
                     if (_fishs[i].DaysLife > 0)
                     {
@@ -85,48 +85,46 @@ namespace HomeWorkAkwarium
             else
             {
                 Console.WriteLine("Аквариум пуст");
-            }          
+            }
         }
 
         public void DeleteFish()
         {
             Console.WriteLine("Введите номер рыбы из списка, для удаления из аквариума");
-            string userInput =Console.ReadLine();
+            string userInput = Console.ReadLine();
 
             if (int.TryParse(userInput, out int intValue))
             {
-                intValue--;
+                intValue -= 1;
                 if (intValue > 0)
                 {
                     _fishs.RemoveAt(intValue);
-                }                
+                }
             }
             else
             {
                 Console.WriteLine("Не верный ввод");
-            }                                       
+            }
         }
 
         public void SkipDays()
         {
             for (int i = 0; i < _fishs.Count; i++)
             {
-               _fishs[i].SkipDaysLife(_fishs[i].DaysLife);
+                _fishs[i].SkipDaysLife(_fishs[i].DaysLife);
             }
         }
     }
 
     class Fish
     {
-        private Dictionary<string, int> _fish = new Dictionary<string, int>();
         public string Name { get; private set; }
         public int DaysLife { get; private set; }
 
         public Fish()
         {
-            CreatingFishLibrary();
             SetName();
-            GetDaysLife(Name);
+            SetDaysLife();
         }
 
         public void SkipDaysLife(int daysLife)
@@ -136,50 +134,30 @@ namespace HomeWorkAkwarium
             return;
         }
 
-        private void CreatingFishLibrary()
-        {
-            _fish.Add("Акантодорас", 3240);
-            _fish.Add("Бетта", 1080);
-            _fish.Add("Бычок", 1800);
-            _fish.Add("Нанностомус",5);
-        }
-
         private void SetName()
         {
+            Console.WriteLine($"Введите название рыбы которую добовляеет в аквариум.");
+            Name = Console.ReadLine();
+        }
+
+        private void SetDaysLife()
+        {
+            Console.WriteLine($"Введите среднее количество дней жизни рыбы.");
             bool done = false;
 
             while (!done)
             {
-                Console.WriteLine($"Выбирите рыбу которую хотите добавить в аквариум.");
-                ShowInfoFish();
                 string userInput = Console.ReadLine();
-
-                if (_fish.ContainsKey(userInput))
+                if (int.TryParse(userInput, out int intValue))
                 {
-                    Name = userInput;
-                    done = true;
+                    if (intValue > 0)
+                    {
+                        DaysLife = intValue;
+                        break;
+                    }                    
                 }
-                else
-                {
-                    Console.WriteLine($"{userInput}  с таким название рыбы нету");
-                }
-            }           
-        }
 
-        private void GetDaysLife(string name)
-        {
-            if (_fish.ContainsKey(name))
-            {
-                DaysLife = _fish[name];
-            }
-        }
-
-        private void ShowInfoFish()
-        {
-            Console.WriteLine();
-            foreach (var fish in _fish)
-            {
-                Console.WriteLine($"Название рыбы {fish.Key} : продолжительность жизни { fish.Value} дней");                
+                Console.WriteLine("Не коректный вод данных. Повторите.");
             }
         }
     }
