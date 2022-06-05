@@ -91,8 +91,8 @@ namespace HomeWorkAkwarium
         public void DeleteFish()
         {
             Console.WriteLine("Введите номер рыбы из списка, для удаления из аквариума");
-
             string userInput =Console.ReadLine();
+
             if (int.TryParse(userInput, out int intValue))
             {
                 intValue--;
