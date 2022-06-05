@@ -91,8 +91,20 @@ namespace HomeWorkAkwarium
         public void DeleteFish()
         {
             Console.WriteLine("Введите номер рыбы из списка, для удаления из аквариума");
-            int userInput =Convert.ToInt32(Console.ReadLine()) - 1;
-            _fishs.RemoveAt(userInput);                        
+
+            string userInput =Console.ReadLine();
+            if (int.TryParse(userInput, out int intValue))
+            {
+                intValue--;
+                if (intValue > 0)
+                {
+                    _fishs.RemoveAt(intValue);
+                }                
+            }
+            else
+            {
+                Console.WriteLine("Не верный ввод");
+            }                                       
         }
 
         public void SkipDays()
