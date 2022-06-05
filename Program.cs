@@ -149,15 +149,13 @@ namespace HomeWorkAkwarium
                 string userInput = Console.ReadLine();
                 if (int.TryParse(userInput, out int intValue))
                 {
-                    if (intValue > 0)
-                    {
-                        DaysLife = intValue;
-                        done = true;
-                        break;
-                    }                    
+                    DaysLife = intValue;
+                    done = true;                   
                 }
-
-                Console.WriteLine("Не коректный вод данных. Повторите.");
+                else
+                {
+                    Console.WriteLine("Не коректный вод данных. Повторите.");
+                }
             }
         }
     }
