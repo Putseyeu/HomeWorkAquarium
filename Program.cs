@@ -111,7 +111,7 @@ namespace HomeWorkAkwarium
         {
             for (int i = 0; i < _fishs.Count; i++)
             {
-                _fishs[i].SkipDaysLife(_fishs[i].DaysLife);
+                _fishs[i].SkipDaysLife();
             }
         }
     }
@@ -127,11 +127,10 @@ namespace HomeWorkAkwarium
             SetDaysLife();
         }
 
-        public void SkipDaysLife(int daysLife)
+        public void SkipDaysLife()
         {
-            daysLife--;
-            DaysLife = daysLife;
-            return;
+            int numberDays = 1;
+            DaysLife -= numberDays;
         }
 
         private void SetName()
@@ -145,7 +144,7 @@ namespace HomeWorkAkwarium
             Console.WriteLine($"Введите среднее количество дней жизни рыбы.");
             bool done = false;
 
-            while (!done)
+            while (done != true)
             {
                 string userInput = Console.ReadLine();
                 if (int.TryParse(userInput, out int intValue))
@@ -153,6 +152,7 @@ namespace HomeWorkAkwarium
                     if (intValue > 0)
                     {
                         DaysLife = intValue;
+                        done = true;
                         break;
                     }                    
                 }
